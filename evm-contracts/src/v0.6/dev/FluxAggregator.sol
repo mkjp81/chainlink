@@ -606,14 +606,10 @@ contract FluxAggregator is AggregatorInterface, Owned {
       statusCode = delayedStatus(_round);
       if (statusCode != 0) {
         return statusCode;
-      } else if (maxAnswerCount == 0) {
-        return 8;
       }
     } else {
       return validateStartedRound(_round);
     }
-
-    return 0;
   }
 
   function validateOracleRound(uint32 _id)
@@ -651,7 +647,7 @@ contract FluxAggregator is AggregatorInterface, Owned {
     view
     returns (uint256)
   {
-    if (rounds[_id].details.maxAnswers == 0) return 9;
+    if (rounds[_id].details.maxAnswers == 0) return 8;
 
     return 0;
   }
