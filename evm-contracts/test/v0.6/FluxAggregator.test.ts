@@ -272,7 +272,10 @@ describe('FluxAggregator', () => {
       })
 
       it('reverts', async () => {
-        await matchers.evmRevert(aggregator.updateAnswer(nextRound + 1, answer))
+        await matchers.evmRevert(
+          aggregator.updateAnswer(nextRound + 1, answer),
+          '!!!',
+        )
       })
     })
 
@@ -338,6 +341,7 @@ describe('FluxAggregator', () => {
 
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -351,6 +355,7 @@ describe('FluxAggregator', () => {
       it('reverts', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Ned).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -405,6 +410,7 @@ describe('FluxAggregator', () => {
       it('reverts', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound + 1, answer),
+          '!!!',
         )
       })
     })
@@ -413,6 +419,7 @@ describe('FluxAggregator', () => {
       it('reverts', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Carol).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -427,6 +434,7 @@ describe('FluxAggregator', () => {
       it('reverts', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -493,6 +501,7 @@ describe('FluxAggregator', () => {
 
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -529,10 +538,12 @@ describe('FluxAggregator', () => {
       it('reverts when called by an oracle who answered recently', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Ned).updateAnswer(nextRound, answer),
+          '!!!',
         )
 
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -601,6 +612,7 @@ describe('FluxAggregator', () => {
         // expected to revert because the sender started the last round
         await matchers.evmRevert(
           aggregator.connect(personas.Ned).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
 
@@ -788,6 +800,7 @@ describe('FluxAggregator', () => {
               maxAns,
               rrDelay,
             ),
+          '!!!',
         )
       })
     })
@@ -804,6 +817,7 @@ describe('FluxAggregator', () => {
               maxAns,
               rrDelay,
             ),
+          '!!!',
         )
       })
     })
@@ -839,6 +853,7 @@ describe('FluxAggregator', () => {
       it('does not allow the oracle to update the round', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Nelly).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
 
@@ -963,6 +978,7 @@ describe('FluxAggregator', () => {
               1,
               rrDelay,
             ),
+          '!!!',
         )
       })
     })
@@ -988,6 +1004,7 @@ describe('FluxAggregator', () => {
               limit + 1,
               rrDelay,
             ),
+          '!!!',
         )
       })
     })
@@ -1068,6 +1085,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Carol)
             .removeOracle(personas.Neil.address, minAns, maxAns, rrDelay),
+          '!!!',
         )
       })
     })
@@ -1090,6 +1108,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Ned)
             .removeOracle(personas.Neil.address, 0, 0, rrDelay),
+          '!!!',
         )
       })
     })
@@ -1110,6 +1129,7 @@ describe('FluxAggregator', () => {
         // cannot participate in future rounds
         await matchers.evmRevert(
           aggregator.connect(personas.Nelly).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -1248,6 +1268,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Carol)
             .withdrawFunds(personas.Carol.address, deposit),
+          '!!!',
         )
       })
 
@@ -1272,6 +1293,7 @@ describe('FluxAggregator', () => {
             aggregator
               .connect(personas.Carol)
               .withdrawFunds(personas.Carol.address, deposit),
+            '!!!',
           )
 
           matchers.bigNum(
@@ -1288,6 +1310,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Eddy)
             .withdrawFunds(personas.Carol.address, deposit),
+          '!!!',
         )
 
         matchers.bigNum(deposit, await aggregator.availableFunds())
@@ -1371,6 +1394,7 @@ describe('FluxAggregator', () => {
           updateFutureRounds(aggregator, {
             maxAnswers: 4,
           }),
+          '!!!',
         )
       })
     })
@@ -1382,6 +1406,7 @@ describe('FluxAggregator', () => {
             minAnswers: 3,
             maxAnswers: 2,
           }),
+          '!!!',
         )
       })
     })
@@ -1392,6 +1417,7 @@ describe('FluxAggregator', () => {
           updateFutureRounds(aggregator, {
             restartDelay: 3,
           }),
+          '!!!',
         )
       })
     })
@@ -1400,6 +1426,7 @@ describe('FluxAggregator', () => {
       it('reverts', async () => {
         await matchers.evmRevert(
           updateFutureRounds(aggregator.connect(personas.Ned)),
+          '!!!',
         )
       })
     })
@@ -1414,12 +1441,15 @@ describe('FluxAggregator', () => {
       it('reverts all oracle answers', async () => {
         await matchers.evmRevert(
           aggregator.connect(personas.Ned).updateAnswer(nextRound, answer),
+          '!!!',
         )
         await matchers.evmRevert(
           aggregator.connect(personas.Nelly).updateAnswer(nextRound, answer),
+          '!!!',
         )
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).updateAnswer(nextRound, answer),
+          '!!!',
         )
       })
     })
@@ -1538,6 +1568,7 @@ describe('FluxAggregator', () => {
               personas.Neil.address,
               paymentAmount.add(ethers.utils.bigNumberify(1)),
             ),
+          '!!!',
         )
       })
     })
@@ -1552,6 +1583,7 @@ describe('FluxAggregator', () => {
               personas.Nelly.address,
               ethers.utils.bigNumberify(1),
             ),
+          '!!!',
         )
       })
     })
@@ -1597,6 +1629,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Carol)
             .updateAdmin(personas.Ned.address, personas.Nelly.address),
+          '!!!',
         )
       })
     })
@@ -1607,6 +1640,7 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Ned)
             .updateAdmin(personas.Ned.address, personas.Nelly.address),
+          '!!!',
         )
       })
     })
@@ -1658,7 +1692,7 @@ describe('FluxAggregator', () => {
       })
 
       it('reverts', async () => {
-        await matchers.evmRevert(aggregator.startNewRound())
+        await matchers.evmRevert(aggregator.startNewRound(), '!!!')
       })
 
       describe('when that round has timed out', () => {
@@ -1744,6 +1778,7 @@ describe('FluxAggregator', () => {
 
           await matchers.evmRevert(
             aggregator.connect(personas.Neil).startNewRound(),
+            '!!!',
           )
         })
 
@@ -1771,10 +1806,12 @@ describe('FluxAggregator', () => {
           aggregator
             .connect(personas.Neil)
             .setAuthorization(personas.Neil.address, true),
+          '!!!',
         )
 
         await matchers.evmRevert(
           aggregator.connect(personas.Neil).startNewRound(),
+          '!!!',
         )
       })
     })
