@@ -109,7 +109,7 @@ describe('FluxAggregator', () => {
       'reportingRound',
       'reportingRoundStartedAt',
       'restartDelay',
-      'roundState',
+      'oracleRoundState',
       'startNewRound',
       'timeout',
       'updateAdmin',
@@ -1760,7 +1760,7 @@ describe('FluxAggregator', () => {
     })
   })
 
-  describe('#roundState', () => {
+  describe('#oracleRoundState', () => {
     let minMax
 
     beforeEach(async () => {
@@ -1780,7 +1780,7 @@ describe('FluxAggregator', () => {
     })
 
     it('returns all of the important round information', async () => {
-      const state = await aggregator.connect(personas.Nelly).roundState()
+      const state = await aggregator.connect(personas.Nelly).oracleRoundState()
       matchers.bigNum(1, state._reportableRoundId)
       assert.equal(true, state._eligibleToSubmit)
       matchers.bigNum(0, state._latestRoundAnswer)
@@ -1795,7 +1795,9 @@ describe('FluxAggregator', () => {
       })
 
       it('keeps the round ID and allows the oracle to submit', async () => {
-        const state = await aggregator.connect(personas.Nelly).roundState()
+        const state = await aggregator
+          .connect(personas.Nelly)
+          .oracleRoundState()
         matchers.bigNum(1, state._reportableRoundId)
         assert.equal(true, state._eligibleToSubmit)
         matchers.bigNum(0, state._latestRoundAnswer)
@@ -1810,7 +1812,9 @@ describe('FluxAggregator', () => {
       })
 
       it('keeps the round ID and allows the oracle to submit', async () => {
-        const state = await aggregator.connect(personas.Nelly).roundState()
+        const state = await aggregator
+          .connect(personas.Nelly)
+          .oracleRoundState()
         matchers.bigNum(1, state._reportableRoundId)
         assert.equal(false, state._eligibleToSubmit)
         matchers.bigNum(answer, state._latestRoundAnswer)
@@ -1824,7 +1828,9 @@ describe('FluxAggregator', () => {
         })
 
         it('bumps the round ID and allows the oracle to submit', async () => {
-          const state = await aggregator.connect(personas.Nelly).roundState()
+          const state = await aggregator
+            .connect(personas.Nelly)
+            .oracleRoundState()
 
           matchers.bigNum(2, state._reportableRoundId)
           assert.equal(true, state._eligibleToSubmit)
@@ -1843,7 +1849,9 @@ describe('FluxAggregator', () => {
       })
 
       it('bumps the round ID and allows the oracle to submit', async () => {
-        const state = await aggregator.connect(personas.Nelly).roundState()
+        const state = await aggregator
+          .connect(personas.Nelly)
+          .oracleRoundState()
         matchers.bigNum(2, state._reportableRoundId)
         assert.equal(true, state._eligibleToSubmit)
         matchers.bigNum(answer, state._latestRoundAnswer)
